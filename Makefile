@@ -47,7 +47,3 @@ copy-microevent-js:
 
 update-submodules:
 	git submodule update --recursive --init
-
-clean-flickr:
-	rm content/photos/[^_]*.md
-	rm static/media/photos/*
