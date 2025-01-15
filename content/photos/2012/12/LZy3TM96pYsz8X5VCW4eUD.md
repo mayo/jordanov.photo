@@ -5,6 +5,7 @@ path: photos/LZy3TM96pYsz8X5VCW4eUD
 taxonomies:
   albums:
   - Whistler Blackcomb
+  - Featured
   categories:
   series:
   tags:

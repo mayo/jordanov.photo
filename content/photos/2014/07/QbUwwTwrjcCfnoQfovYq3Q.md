@@ -3,7 +3,8 @@ title: Aliens
 date: '2014-07-10T11:41:28'
 path: photos/QbUwwTwrjcCfnoQfovYq3Q
 taxonomies:
-  albums: []
+  albums:
+  - Featured
   categories:
   series:
   tags:
