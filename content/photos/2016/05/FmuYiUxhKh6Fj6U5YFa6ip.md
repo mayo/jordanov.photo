@@ -3,7 +3,8 @@ title: Turning in for the night
 date: '2016-05-23T07:57:05'
 path: photos/FmuYiUxhKh6Fj6U5YFa6ip
 taxonomies:
-  albums: []
+  albums:
+    - Featured
   categories:
   series:
   tags:

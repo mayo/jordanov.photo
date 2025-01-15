@@ -5,6 +5,7 @@ path: photos/UXhBab3SPsToBpH9pvBJGX
 taxonomies:
   albums:
   - Haberl Hut 2015
+  - Featured
   categories:
   series:
   tags:

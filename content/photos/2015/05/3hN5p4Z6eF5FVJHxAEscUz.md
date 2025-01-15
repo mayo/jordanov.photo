@@ -3,7 +3,8 @@ title: Science World
 date: '2015-05-23T14:30:55'
 path: photos/3hN5p4Z6eF5FVJHxAEscUz
 taxonomies:
-  albums: []
+  albums:
+  - Featured
   categories:
   series:
   tags:
