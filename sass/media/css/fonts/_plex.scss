@@ -2,15 +2,14 @@
 // $font-prefix: '/media/fonts/plex' !default;
 // @import 'depends/plex/scss/ibm-plex.scss';
 
-
 /* condensed */
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Sans Condensed';
+    font-family: "IBM Plex Sans Condensed";
     font-style: normal;
     font-weight: 600;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans-Condensed/fonts/complete/woff2/IBMPlexSansCondensed-SemiBold.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans-Condensed/fonts/complete/woff2/IBMPlexSansCondensed-SemiBold.woff2")
+        format("woff2");
 }
 
 /* serif */
@@ -32,159 +31,159 @@
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Serif';
+    font-family: "IBM Plex Serif";
     font-style: normal;
     font-weight: 450;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Serif/fonts/complete/woff2/IBMPlexSerif-Text.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Serif/fonts/complete/woff2/IBMPlexSerif-Text.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Serif';
+    font-family: "IBM Plex Serif";
     font-style: italic;
     font-weight: 450;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Serif/fonts/complete/woff2/IBMPlexSerif-TextItalic.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Serif/fonts/complete/woff2/IBMPlexSerif-TextItalic.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Serif';
+    font-family: "IBM Plex Serif";
     font-style: normal;
     font-weight: 700;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Serif/fonts/complete/woff2/IBMPlexSerif-Bold.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Serif/fonts/complete/woff2/IBMPlexSerif-Bold.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Serif';
+    font-family: "IBM Plex Serif";
     font-style: italic;
     font-weight: 700;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Serif/fonts/complete/woff2/IBMPlexSerif-BoldItalic.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Serif/fonts/complete/woff2/IBMPlexSerif-BoldItalic.woff2")
+        format("woff2");
 }
 
 /* sans */
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Sans';
+    font-family: "IBM Plex Sans";
     font-style: normal;
     font-weight: 300;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Light.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Light.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Sans';
+    font-family: "IBM Plex Sans";
     font-style: normal;
     font-weight: 400;
-    ///TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Regular.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Regular.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Sans';
+    font-family: "IBM Plex Sans";
     font-style: italic;
     font-weight: 400;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Italic.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Italic.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Sans';
+    font-family: "IBM Plex Sans";
     font-style: normal;
     font-weight: 450;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Text.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Text.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Sans';
+    font-family: "IBM Plex Sans";
     font-style: italic;
     font-weight: 450;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-TextItalic.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-TextItalic.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Sans';
+    font-family: "IBM Plex Sans";
     font-style: normal;
     font-weight: 600;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-SemiBold.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-SemiBold.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Sans';
+    font-family: "IBM Plex Sans";
     font-style: italic;
     font-weight: 600;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-SemiBoldItalic.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-SemiBoldItalic.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Sans';
+    font-family: "IBM Plex Sans";
     font-style: normal;
     font-weight: 700;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Bold.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Bold.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Sans';
+    font-family: "IBM Plex Sans";
     font-style: italic;
     font-weight: 700;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-BoldItalic.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-BoldItalic.woff2")
+        format("woff2");
 }
 
 /* mono */
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Mono';
+    font-family: "IBM Plex Mono";
     font-style: normal;
     font-weight: 400;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-Regular.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-Regular.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Mono';
+    font-family: "IBM Plex Mono";
     font-style: italic;
     font-weight: 400;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-Italic.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-Italic.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Mono';
+    font-family: "IBM Plex Mono";
     font-style: normal;
     font-weight: 700;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-Bold.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-Bold.woff2")
+        format("woff2");
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'IBM Plex Mono';
+    font-family: "IBM Plex Mono";
     font-style: italic;
     font-weight: 700;
-    //TODO: enable me - temporarily disabling to avoid issues with safari on localhost dev.
-    // src: url('//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-BoldItalic.woff2') format('woff2');
+    src: url("//cdn.jsdelivr.net/gh/ibm/plex/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-BoldItalic.woff2")
+        format("woff2");
 }
 
 /*
@@ -204,7 +203,15 @@ mono
 700 == bold
 */
 
-$font-family-sans: "IBM Plex Sans", -system-ui, -apple-system, sans-serif;
-$font-family-condensed: "IBM Plex Sans Condensed", -system-ui, -apple-system, sans-serif;
+$font-family-sans:
+    "IBM Plex Sans",
+    -system-ui,
+    -apple-system,
+    sans-serif;
+$font-family-condensed:
+    "IBM Plex Sans Condensed",
+    -system-ui,
+    -apple-system,
+    sans-serif;
 $font-family-serif: "IBM Plex Serif", serif;
 $font-family-mono: "IBM Plex Mono", monospace;
