@@ -1,0 +1,39 @@
+---
+title: IMG_8633
+date: '2014-09-23T22:08:16'
+path: photos/fF9pt7K32xybgpp6BrihMt
+taxonomies:
+  albums:
+  - CMTS Sky Pilot 2014
+  categories:
+  series:
+  tags:
+  - BC
+  - Canada
+  - CA
+  cameras:
+  - Canon EOS 5D Mark II
+  lenses:
+  - Canon EF 16-35mm f/2.8L II USM
+extra:
+  photo_id: fF9pt7K32xybgpp6BrihMt
+  photo_file: 2h/TU/2hTUxAaufwCGAg91EuQBG359gvtL.jpg
+  date_taken: '2014-09-21T11:06:54'
+  image_data_bl2b: 2hTUxAaufwCGAg91EuQBG359gvtL
+  license:
+  camera:
+    make: Canon
+    model: EOS 5D Mark II
+    lens: Canon EF 16-35mm f/2.8L II USM
+  exposure:
+    iso: 200
+    aperture: 11.0
+    shutter_speed: 1/400
+    flash: false
+    focal_length: 27
+  gps:
+    latitude:
+    longitude:
+    altitude:
+  width_multiplier: 1
+---
