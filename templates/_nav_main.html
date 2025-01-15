@@ -1,0 +1,23 @@
+<ul class="nav-group">
+    <li><a href="{{ get_url(path="@/photos/_index.md") }}" class="menuitem" role="menuitem">Photostream</a></li>
+</ul>
+{# ["albums", "tags", "collections", "cameras", "lenses", "film"] #}
+{% for taxonomy in ["albums", "tags"] %}
+    {% set taxon = get_taxonomy(kind=taxonomy) %}
+    {% if taxon.kind.render %}
+<ul class="nav-group">
+    {% set extra = config.extra.taxonomies | get(key=taxon.kind.name, default=config.extra.taxonomies._default) %}
+    <li><a href="{{ taxon.permalink }}" class="menuitem" role="menuitem">{{ taxon.kind.name | title }}</a></li>
+</ul>
+    {% endif %}
+{% endfor %}
+
+<ul class="nav-group">
+    <li><a href="{{ get_url(path="@/about.md") }}" class="menuitem" role="menuitem">About</a></li>
+</ul>
+
+{% if main is defined and main != true %}
+<ul class="nav-group">
+    <li><a href="{{ get_url(path="@/colophon.md") }}" class="menuitem" role="menuitem">Colophon</a></li>
+</ul>
+{% endif %}

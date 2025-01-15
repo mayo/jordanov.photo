@@ -1,0 +1,121 @@
+{%- import "macros/global.html" as macros -%}
+<!DOCTYPE html>
+{%- block template_vars -%}
+  {# `node` is defined here as base, and used throughout all templates #}
+  {% set node = page | default(value=section | default(value="")) %}
+
+  {# setting page_title here makes it globally accessible and possible to override throughout template inheritance #}
+  {% set page_title = "" %}
+  {% if node and node != "" %}
+    {% set page_title = macros::get_page_title(page=node) %}
+  {% endif %}
+  {% if node.path and node.path is starting_with("/photos/") %}
+    {% set page_title = macros::get_photo_title(photo=node) %}
+  {% endif %}
+
+  {% set page_id = page_id | default(value=node.extra.page_id | default(value=node.slug | default(value=""))) %}
+  {% set container_width = container_width | default(value=macros::node_container_width(node=node)) %}
+  {% set dark_bg = dark_bg | default(value=false) %}
+{% endblock template_vars %}
+<html class="no-js" lang="en">
+  <head>
+    <title>{% block title %}{{ page_title | safe | striptags }} | {% endblock %}{{ config.title | safe }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="author" content="{{ config.extra.author.name }} {{ config.extra.author.email }}">
+
+    {% if config.description -%}
+    <meta name="description" content="{{config.description}}">
+    {% endif -%}
+    {% if config.extra.site.keywords -%}
+    <meta name="keywords" content="{{config.extra.site.keywords}}">
+    {% endif -%}
+
+    <meta property="og:title" content="{{ page_title | striptags }}">
+    {% if page.description -%}
+      {% set og_description = page.description -%}
+    {% elif page.content -%}
+      {% set og_description = macros::excerpt(content=page.content) -%}
+    {% else -%}
+      {% set og_description = config.description -%}
+    {% endif -%}
+    <meta property="og:description" content="{{ og_description | default(value='') | striptags }}">
+
+    {% block css %}
+    <link rel="stylesheet" href="{{ get_url(path='media/css/default.css') }}"/>
+    <!-- <link rel="stylesheet" href="/media/css/handheld.css" media="only screen"/> -->
+    {% endblock %}
+
+    {% block rss %}
+      {% if config.generate_feed %}
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path='/atom.xml') | safe }}">
+      {% endif %}
+    {% endblock rss %}
+
+    {% for link, _ in config.extra.rel_me -%}
+    <link rel="me" href="{{ config.extra.links[link] | safe }}"/>
+    {% endfor -%}
+    <link rel="gpgkey" href="{{ config.extra.links.pubkey | safe }}"/>
+
+    <link rel="icon" href="/favicon.svg"/>
+    <link rel="mask-icon" href="/mask-icon.svg" color="#000000">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+
+    {%- block js -%}
+    {%- endblock %}
+  </head>
+  <body {% if page_id -%}id="{{ page_id }}"{%- endif %} class="{% if dark_bg -%}dark-bg{%- endif %}">
+  {% block body_container %}
+    {% block header_wrapper %}
+    {# header  id="mainhead" used to menu toggle button from default.scss.hugo #}
+    <header  class="content-container {{ container_width }}" id="mainhead">
+    {% block header_content %}
+      {% if not nav_id %}
+        {% set nav_id = "sitenav" %}
+      {% endif %}
+      {% include '_sitenav.html' %}
+    {% endblock header_content %}
+    </header>
+    {% endblock %}
+
+      <main>
+    {% block main_content %}
+      <div class="content-container {{ container_width }}">
+        {% block content %}{% endblock %}
+      </div>
+    {% endblock %}
+    </main>
+
+    {% block footer_wrapper %}
+    <footer class="content-container {{ container_width }}">
+      {% block footer %}
+
+        {% block footer_nav %}
+        <nav id="bottom-{{nav_id}}" class="menu bottom" role="menubar" aria-orientation="horizontal">
+          {{ macros::nav(main=false) }}
+          {% include "_nav_extra.html" %}
+        </nav>
+        {% endblock %}
+
+        {% block footer_content %}
+          {% for link, icon in config.extra.social_links %}
+          <a class="footer-item" href="{{ config.extra.links[link] | safe }}"><i class="icon {{ icon }}" title="{{ config.extra.services[link] }}"></i><span class="sr-only">{{ config.extra.services[link] }}</span></a>
+          {% endfor %}
+          {% if config.generate_feed %}
+          <a class="footer-item" href="{{ get_url(path='/atom.xml') | safe }}"><i class="icon icon-rss" title="RSS"></i><span class="sr-only">RSS</span></a>
+          {% endif %}
+          {% set h_card = "" %}
+          {% if node.extra.page_id | default(value="") != 'about' %}
+            {% set h_card = "h-card p-name u-url" %}
+          {% endif %}
+          <span class="copyright footer-item">Copyright &copy;{{ now() | date(format='%Y') }} <a class="{{h_card}}" href="{{ config.extra.base_url | safe }}{ { get_url(path='@/about/index.md') } }">{{ config.extra.author.name }}</a></span>
+        {% endblock %}
+
+      {% endblock %}
+    </footer>
+    {% endblock footer_wrapper %}
+  {% endblock body_container %}
+  </body>
+</html>

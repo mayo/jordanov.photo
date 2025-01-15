@@ -1,0 +1,49 @@
+{% extends "page.html" %}
+
+{% block template_vars %}
+  {#
+    See if there is a page named same as term, within section with the same name
+    as taxonomy name. If so, load the page to make taxonomy customization easier.
+  #}
+  {%- set _path = taxonomy.name ~ "/_index.md" -%}
+  {%- set _taxonomy_page_exists = load_data(path=_path, required=false) -%}
+  {% if _taxonomy_page_exists %}
+      {% set_global section = get_section(path=_path) %}
+  {% endif %}
+
+  {{super()}}
+
+  {% if not section or not section.title %}
+    {% set page_title = taxonomy.name | title %}
+  {% endif %}
+  {% set page_id = "taxonomy-list" %}
+{% endblock template_vars %}
+
+{% block page_content %}
+{% if section %}
+{{ section.content | safe }}
+{% endif %}
+
+<ul class="taxonomy-term-list taxonomy-{{ taxonomy.name }}">
+    {% if taxonomy.name == "tags" %}
+        {# Find the highest count of terms, serving as max-weight for re-mapping to 1-10 #}
+        {% set_global max_count = 0 %}
+        {% for term in terms | sort(attribute="name") %}
+            {% set count = term.pages | length %}
+            {% if count > max_count %}
+                {% set_global max_count = count %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% for term in terms | sort(attribute="name") %}
+    <li><a href="{{ term.path }}" 
+    
+        {% if taxonomy.name == "tags" %}
+            {% set weight = term.pages | length %}
+            {# (oldValue - oldMin) * (newMax - newMin) / (oldMax - oldMin) + newMin #}
+    data-weight="{{ (weight - 1) * (10 - 1) / (max_count - 1) + 1 | round }}"
+        {% endif %}
+    >{{ term.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock page_content %}

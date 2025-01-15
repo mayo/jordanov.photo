@@ -1,0 +1,17 @@
+
+body > footer.content-container {
+    justify-content: start;
+    column-gap: 1rem;
+  }
+  
+  body > footer .footer-item {
+    // body > footer is context-container, which uses flex layout
+    flex-grow: 0;
+    flex-basis: min-content;
+  }
+  
+  body > footer .footer-item.copyright {
+    flex: 1 1;
+    text-align: right;
+  }
+  

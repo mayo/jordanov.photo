@@ -1,0 +1,26 @@
+{% extends 'page-sidebar.html' %}
+
+{% block template_vars %}
+  {{ super() }}
+{% endblock template_vars %}
+
+{% block sidebar %}
+  {{ macros::personal_meta(name=true) }}
+
+<ul>
+  {% for taxonomy in ["albums", "tags", "collections", "cameras", "lenses", "film"] %}
+      {% set taxon = get_taxonomy(kind=taxonomy) %}
+      {% if taxon.kind.render %}
+        {% set extra = config.extra.taxonomies | get(key=taxon.kind.name, default=config.extra.taxonomies._default) %}
+      <li><i class="fa inline icon {{ extra.icon }}" title="{{ extra.title | default(value=taxon.kind.name) }}"></i><span class="sr-only">{{ extra.title | default(value=taxon.kind.name) }}</span><a href="{{ taxon.permalink }}">{{ taxon.kind.name | title }}</a></li>
+      {% endif %}
+  {% endfor %}
+</ul>
+
+<p class="social">
+  {% for link, icon in config.extra.social_links %}
+  <a href="{{ config.extra.links[link] | safe}}"><i class="icon {{ icon }}"></i><span class="sr-only" title="{{ config.extra.services[link] }}">{{ config.extra.services[link] }}</span></a>
+{% endfor %}
+</p>
+
+{% endblock sidebar %}

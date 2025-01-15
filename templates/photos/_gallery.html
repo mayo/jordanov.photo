@@ -1,0 +1,10 @@
+<div class="flex-item flex-item-100 image-gallery">
+{% for photo in collection %}
+    <figure class="image-item" data-width-m="{{ photo.extra.width_multiplier | default(value=1) }}" data-height-m="{{ photo.extra.height_multiplier | default(value=1) }}">
+        <a href="{{photo.path}}">
+            <img src="/media/photos/{{ photo.extra.photo_file }}" alt="" {% if lazy_load_offset > 0 and loop.index0 > lazy_load_offset %}load="lazy"{% endif %}/>
+            <figcaption>{{ macros::get_photo_title(photo=photo, include_untitled_date=true) }}</figcaption>
+        </a>
+    </figure>
+{% endfor %}
+</div>

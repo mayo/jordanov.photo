@@ -1,0 +1,9 @@
+/* Customized Linearicon font */
+$icomoon-font-path: "/media/fonts/linearicons" !default;
+
+.icon {
+    text-rendering: auto;
+    display: inline-block;
+}
+
+@import "../../../../depends/Linearicons-subset-v1.0/style.scss";

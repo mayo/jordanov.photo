@@ -1,0 +1,15 @@
+{% set taxon = get_taxonomy(kind="albums") %}
+{% set terms = taxon.items | map(attribute="name") %}
+{% if "Featured" in terms %}
+    {% set featured_album = get_taxonomy_term(kind="albums", term="Featured") %}
+<ul class="nav-group gallery">
+    <li>Showing</li>
+    {% for page in featured_album.pages %}
+    <li><a href="/#slide{{ loop.index0 }}">{{ macros::get_photo_title(photo=page) }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="nav-group about h-card p-adr h-adr">
+    <span class="p-name u-url">{{ config.extra.author.name }}</span>
+    {{ macros::personal_meta(name=false) }}
+  </div>

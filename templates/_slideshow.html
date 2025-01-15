@@ -1,0 +1,42 @@
+<div class="slideshow chameleon">
+    <div class="controls bottomright">
+    <button class="previous icon icon-chevron-left-circle" title="Previous"><span class="sr-only">previous</span></button>
+    <button class="next icon icon-chevron-right-circle" title="Next"><span class="sr-only">next</span></button>
+  </div>
+
+  {% set lazy_load_offset = 1 %}
+  <div class="slides">
+    {% for slide in slides %}
+
+      {% set_global quadrants = "" %}
+
+      {% if slide.extra.dark_bg | default(value=false) %}
+        {% set_global quadrants = quadrants ~ " data-darkbg" %}
+      {% endif %}
+
+      {% if slide.extra.dark_bg_quadrants | default(value=false) %}
+        {% for q, val in slide.extra.dark_bg_quadrants %}
+          {% if val == true %}
+            {% set_global quadrants = quadrants ~ " data-darkbg-" ~ q %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+
+      <figure class="slide fullpage image-item {% if loop.first -%}current{% endif %}" data-width-m="{{ slide.extra.width_multiplier | default(value=1) }}" data-height-m="{{ slide.extra.height_multiplier | default(value=1) }}">
+            <img src="/media/photos/{{ slide.extra.photo_file }}" alt="" {% if lazy_load_offset > 0 and loop.index0 >= lazy_load_offset %}load="lazy"{% endif %}/>
+            <figcaption>
+                <div class="icon-label">
+                    <a href="{{ slide.path }}">
+                    <i class="icon icon-camera2" title="Image Caption"></i><span class="sr-only">Image Caption</span>
+                    </a>
+                </div>
+                <div class="description">
+                    <strong>{{ macros::get_photo_title(photo=slide, include_untitled_date=true) }}</strong>
+                    {{ slide.content | safe }}
+                </div>
+            </figcaption>
+      </figure>
+    {% endfor %}
+  </div>
+</div>

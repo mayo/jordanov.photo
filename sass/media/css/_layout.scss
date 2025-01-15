@@ -1,0 +1,43 @@
+
+.flex-item {
+    flex-basis: calc(var(--content-container-multiplier) * 999);
+    flex-grow: 1;
+    width: 100%; //needed for elements like <pre> to show scrollbars when needed
+  }
+  .flex-item-25 {
+    flex-grow: 2.5;
+  }
+  
+  .flex-item-30 {
+    flex-grow: 3;
+  }
+  
+  .flex-item-33 {
+    flex-grow: 3.33;
+  }
+  
+  .flex-item-40 {
+    flex-grow: 4;
+  }
+  
+  .flex-item-50 {
+    flex-grow: 5;
+  }
+  
+  .flex-item-60 {
+    flex-grow: 6;
+  }
+  
+  .flex-item-70 {
+    flex-grow: 7;
+  }
+
+  .flex-item-75 {
+    flex-grow: 7.5;
+  }
+  
+  .flex-item-100 {
+    flex-grow: 10;
+    // without min-width, two .flex-item-100 will still live side-by-side?!?
+    min-width: 100%;
+  }

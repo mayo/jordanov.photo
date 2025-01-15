@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{# Remove title, so only name shows #}
+{% block title %}{% endblock %}
+
+
+
+{% block css %}
+  {{ super() }}
+<link rel="stylesheet" type="text/css" href="/media/css/index.css" />
+{% endblock %}
+
+{% block js %}
+  {{ super() }}
+  <script src="/media/js/microevent.js"></script>
+  <script src="/media/js/slideshow.js"></script>
+  <script src="/media/js/index.js"></script>
+{% endblock %}
+
+
+
+{% block main_content %}
+
+
+
+    {% set taxon = get_taxonomy(kind="albums") %}
+    {% set terms = taxon.items | map(attribute="name") %}
+    {% if "Featured" in terms %}
+        {% set featured_album = get_taxonomy_term(kind="albums", term="Featured") %}
+
+    {{ macros::display_slideshow(slides=featured_album.pages) }}
+    {% set nav_id = "sitenav2" %}
+    <div class="chameleon"><div class="scrolldown bottomright"><a href="#{{nav_id}}"><i class="icon icon-chevron-down" aria-hidden></i><span class="sr-only">Scroll to content</span></a></div></div>
+
+
+    {% endif %}
+
+<div class="content-container columns {{ container_width }}">
+    <div class="flex-item flex-item-100">
+
+    {% block content %}
+        {{ node.content | safe }}
+    {% endblock %}
+
+<ul>
+    {% set sect = get_section(path="photos/_index.md") %}
+    <li><i class="fa inline icon icon-library" title="Photostream"></i> <a href="{{ sect.path }}">{{ sect.title }}</a></li>
+
+    {% for taxonomy in ["albums", "tags", "collections", "cameras", "lenses", "film"] %}
+        {% set taxon = get_taxonomy(kind=taxonomy) %}
+        {% if taxon.kind.render %}
+            {% set extra = config.extra.taxonomies | get(key=taxon.kind.name, default=config.extra.taxonomies._default) %}
+        <li><i class="fa inline icon {{ extra.icon }}" title="{{ extra.title | default(value=taxon.kind.name) }}"></i> <a href="{{ taxon.permalink }}">{{ taxon.kind.name | title }}</a></li>
+            {% endif %}
+    {% endfor %}
+</ul>
+
+
+
+  </div>
+</div>
+{% endblock %}

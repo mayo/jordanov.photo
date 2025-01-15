@@ -1,0 +1,163 @@
+@import "theme";
+
+/* new stuff */
+
+figure.slide figcaption .icon-label a {
+    color: $darkest;
+}
+
+figure.slide figcaption .description {
+    position: absolute;
+    bottom: 0.1em;
+    left: 2em;
+    width: calc(50vw - 4.2em);
+    opacity: 0;
+    text-align: left;
+}
+
+figure.slide figcaption .description {
+    transition: opacity 0.2s ease-in-out;
+}
+
+figure.slide figcaption .icon-label i,
+.controls button,
+.scrolldown i,
+.logotype {
+    text-shadow: #fff 0px 0px 1px;
+}
+
+figure.slide figcaption .icon-label,
+.slideshow .controls button,
+.scrolldown {
+    opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
+}
+
+figure.slide .description {
+    background-color: $lightest30;
+    padding: 0.2em 0.4em;
+    border-radius: 0.4em;
+}
+
+figure.slide figcaption:hover > *,
+//figure.slide figcaption:hover .icon-label,
+//figure.slide figcaption:hover .description,
+.caption:hover,
+.scrolldown:hover,
+.slideshow .controls button:hover {
+    opacity: 1;
+}
+
+.dark-bg .slideshow .controls,
+.dark-bg .slideshow .controls button,
+.slideshow .dark-bg.controls,
+.slideshow .dark-bg.controls button {
+    color: $lightest;
+}
+.dark-bg .caption,
+.dark-bg.caption {
+    color: $lightest;
+}
+
+/* page specific */
+
+.slideshow {
+    width: 100vw;
+    max-width: 100%; /* fixes width100vw with scrollbars */
+    height: 100vh;
+}
+
+body {
+    min-height: 200vh;
+}
+
+.scrolldown,
+.slideshow .controls {
+    top: 93.6vh;
+    font-size: 1em;
+}
+
+.slideshow .controls {
+    position: absolute;
+    top: 93.6vh;
+    right: 0.8em;
+}
+
+.scrolldown {
+    position: absolute;
+    left: 50vw;
+}
+
+.slideshow figure.slide figcaption {
+    position: absolute;
+    top: 94vh;
+    left: 1em;
+    font-size: 1em;
+    color: $darkest;
+    display: block;
+}
+
+figure.slide figcaption .description {
+    font-size: 0.7em;
+}
+
+.scrolldown a {
+    color: inherit;
+}
+
+.chameleon .scrolldown.dark-bg a {
+    color: $lightest;
+}
+
+.slideshow .controls button {
+    border: 0;
+    background: inherit;
+}
+
+.slideshow .controls button + button {
+    margin-left: 0.1em;
+}
+
+/* gallery */
+
+.slideshow .slides {
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+
+    width: 100vw;
+    height: 100%;
+
+    box-shadow: 0 0.2rem 4rem $darker;
+}
+
+.slideshow figure.slide {
+    width: 100%;
+    height: 100%;
+}
+
+.slideshow figure.slide img {
+    display: block;
+    opacity: 1;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.slideshow figure.slide.fullpage,
+.slideshow figure.slide.next {
+    display: none;
+}
+
+.slideshow figure.slide.current {
+    display: block;
+}
+
+.slideshow figure.slide figcaption p {
+    margin-top: 0;
+    margin-bottom: 0;
+}

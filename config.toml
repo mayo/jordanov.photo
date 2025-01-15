@@ -1,0 +1,133 @@
+# The URL the site will be built for
+base_url = "/"
+
+title = "Mayo Jordanov"
+description = "Mayo Jordanov; software developer, photographer, climber, runner, hiker, adventurer, explorer"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+
+# Feed
+generate_feeds = true
+feed_filenames = ["atom.xml"] # or rss.xml, also used for loading template
+feed_limit = 20
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = false
+
+[[taxonomies]]
+name = "tags"
+feed = true
+
+[[taxonomies]]
+name = "collections"
+feed = true
+render = false
+
+[[taxonomies]]
+name = "albums"
+feed = true
+
+[[taxonomies]]
+name = "categories"
+feed = true
+render = false
+
+[[taxonomies]]
+name = "series"
+feed = true
+render = false
+
+[[taxonomies]]
+name = "cameras"
+feed = true
+
+[[taxonomies]]
+name = "lenses"
+feed = true
+
+[[taxonomies]]
+name = "film"
+feed = true
+
+[extra]
+# Contraty to the base_url in the root, this can be used to build full links.
+base_url = "https://jordanov.photo"
+
+
+[extra.author]
+name = "Mayo Jordanov"
+email = "mayo@oyam.ca"
+website = "oyam.ca"
+
+[extra.rel_me]
+# The keys index into `extra.links`, values index into `extra.icons`.
+oyam = "icon-network"
+github = "icon-github"
+email = "icon-envelope"
+mastodon = "icon-mastodon"
+mastodon_social = "icon-mastodon"
+
+[extra.links]
+pubkey = "https://oyam.ca/pubkey.txt"
+
+#  bitbucket: https://bitbucket.org/mayo
+email = "mailto:mayo@oyam.ca"
+github = "https://github.com/mayo"
+oyam = "https://oyam.ca"
+mastodon = "https://social.oyam.ca/@mayo"
+mastodon_social = "https://mastodon.social/@oyam"
+
+# Secial link service to icon mapping
+[extra.social_links]
+mastodon = "icon-mastodon"
+github = "icon-github"
+oyam = "icon-MJ"
+
+# Service ID to name mapping
+[extra.services]
+email = "Email"
+github = "GitHub"
+mastodon = "Mastodon"
+mastodon_social = "Mastodon"
+oyam = "oyam.ca"
+
+[extra.pubkey]
+# TODO: see obsidian://open?vault=Notes&file=Notes%2F2335723166
+fingerprint = [
+    "50fe",
+    "c3a3",
+    "64b5",
+    "9bee",
+    "734d",
+    "0e9b",
+    "56a3",
+    "789c",
+    "ed4d",
+    "2dd7",
+]
+
+[extra.taxonomies._default]
+icon = ""
+
+[extra.taxonomies.tags]
+icon = "icon-tags"
+
+[extra.taxonomies.albums]
+icon = "icon-pictures"
+
+[extra.taxonomies.cameras]
+icon = "icon-camera2"
+singular = "camera"
+
+[extra.taxonomies.lenses]
+icon = "icon-shutter"
+singular = "lens"
+
+[extra.taxonomies.film]
+icon = "icon-film2"

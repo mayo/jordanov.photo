@@ -1,0 +1,39 @@
+{% extends "page.html" %}
+
+{% block template_vars %}
+  {#
+    See if there is a page named same as term, within section with the same name
+    as taxonomy name. If so, load the page to make taxonomy customization easier.
+  #}
+  {%- set _path = taxonomy.name ~ "/" ~ term.slug ~ ".md" -%}
+  {%- set _term_page_exists = load_data(path=_path, required=false) -%}
+  {% if _term_page_exists %}
+    {% set_global page = get_page(path=_path) %}
+  {% endif %}
+
+  {{super()}}
+  
+  {% if not page or not page.title %}
+    {% set page_title = term.name | title %}
+  {% endif %}
+{% endblock template_vars %}
+
+{% block rss %}
+  {% if taxonomy.feed %}
+    {% set rss_path = taxonomy.name ~ "/" ~ term.name ~ "/atom.xml" %}
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path=rss_path, trailing_slash=false) }}">
+  {% endif %}
+{% endblock rss %}
+
+{% block page_content %}
+
+<div class="content-container {{ container_width }}">
+  {% if page %}
+    {{ page.content | safe }}
+  {% endif %}
+
+  {% set collection = term.pages | sort(attribute="date") %}
+  {{ macros::render_gallery(collection=collection) }}
+</div>
+
+{% endblock page_content %}

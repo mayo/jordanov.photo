@@ -1,0 +1,38 @@
+<dl class="key-value-table {% if name %}h-card p-adr h-adr{% endif%}">
+    {% if name %}
+    <dt>
+        <i class="inline icon icon-user" title="Name"></i><span class="sr-only">Name</span>
+    </dt>
+    <dd>
+      <a href="{{ config.extra.base_url | safe }}{{ get_url(path='@/about.md') }}" class="p-name u-url">Mayo Jordanov</a>
+    </dd>
+    {% endif %}
+    <dt>
+        <i class="inline icon icon-earth" title="Location"></i><span class="sr-only">Location</span>
+    </dt>
+    <dd>
+        <span class="p-region">BC</span>,
+        <span class="p-country-name">Canada</span>
+    </dd>
+
+    <dt>
+        <i class="inline icon icon-envelope" title="Email"></i><span class="sr-only">Email</span>
+    </dt>
+    <dd>
+        <a href="mailto:mayo@oyam.ca" class="u-email">{{ config.extra.author.email | safe }}</a>
+    </dd>
+
+    <dt>
+        <i class="inline icon icon-network" title="Website"></i><span class="sr-only">Website</span>
+    </dt>
+    <dd>
+        <a href="https://{{ config.extra.author.website |safe }}" class="u-website">{{ config.extra.author.website | safe }}</a>
+    </dd>
+
+    <dt>
+        <i class="inline icon icon-file-lock" title="GPG fingerprint"></i><span class="sr-only">GPG fingerprint</span>
+    </dt>
+    <dd>
+        <a rel="me" href="{{ config.extra.links.pubkey | safe }}" class="hex-string">{{ macros::render_hex(value=config.extra.pubkey.fingerprint | slice(start=-4)) }}</a>
+    </dd>
+</dl>

@@ -1,0 +1,56 @@
+{% extends "page.html" %}
+
+{% block template_vars %}
+    {#
+        See if there is a page named same as term, within section with the same
+        name as taxonomy name. If so, load the page to make taxonomy
+        customization easier.
+    #}
+
+    {%- set _path = taxonomy.name ~ "/_index.md" -%}
+    {%- set _taxonomy_page_exists = load_data(path=_path, required=false) -%}
+
+    {% if _taxonomy_page_exists %}
+        {% set_global section = get_section(path=_path) %}
+    {% endif %}
+
+    {{super()}}
+
+    {% if not section or not section.title %}
+        {% set page_title = taxonomy.name | title %}
+    {% endif %}
+
+    {% set page_id = "taxonomy-list" %}
+{% endblock template_vars %}
+
+{% block page_content %}
+    {% if section %}
+        {{ section.content | safe }}
+    {% endif %}
+
+<div class="flex-item flex-item-100 image-gallery taxonomy-term-list taxonomy-{{ taxonomy.name }}">
+    {% for term in terms | sort(attribute="name") %}
+        {% set cover_photo = "" %}
+
+        {%- set _path = 'albums/' ~ term.slug ~ ".md" -%}
+        {%- set _album_exists = load_data(path=_path, required=false) -%}
+        {% if _album_exists %}
+            {% set album = get_page(path=_path) %}
+            {% set cover_photo = album.extra.cover_photo %}
+        {% endif %}
+
+        {# Fall back to first photo, if none is specified #}
+        {% if not cover_photo %}
+            {% set cover_photo = term.pages | first | get(key="extra") | get(key="photo_file") %}
+        {% endif %}
+
+    <figure class="image-item">
+        <a href="{{ term.path }}">
+            <img src="/media/photos/{{ cover_photo }}" alt="" />
+            <figcaption>{{ term.name }}</figcaption>
+        </a>
+    </figure>
+
+    {% endfor %}
+</div>
+{% endblock page_content %}

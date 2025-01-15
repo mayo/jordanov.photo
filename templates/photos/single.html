@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{%- block template_vars -%}
+    {{ super() }}
+    {% set dark_bg = true %}
+    {% set page_id = "single-photo" %}
+{% endblock template_vars %}
+
+{% block main_content %}
+
+<div class="content-container {{ container_width }} columns">
+    <div class="flex-item flex-item-70">
+        <figure>
+            <img src="/media/photos/{{ page.extra.photo_file }}" alt=""/>
+        </figure>
+    </div>
+
+    <div class="flex-item flex-item-30 sidebar">
+        <h1>{{ page_title | safe }}</h1>
+
+        {{ page.content | safe }}
+
+        <dl class="key-value-table">
+        {% for taxonomy in ["tags", "albums", "cameras", "lenses", "film"] %}
+            {% set taxon = get_taxonomy(kind=taxonomy) %}
+            {% if taxon.kind.render and taxonomy in page.taxonomies %}
+                {% set extra = config.extra.taxonomies | get(key=taxon.kind.name, default=config.extra.taxonomies._default) %}
+            <dt><i class="fa inline icon {{ extra.icon }}" title="{{ extra.title | default(value=taxon.kind.name) }}"></i><span class="sr-only">{{ extra.title | default(value=taxon.kind.name) }}</span></dt>
+            <dd>
+                <ul class="taxonomy-term-list taxonomy-{{taxon.kind.name}}">
+                {% for term in page.taxonomies[taxonomy] | sort %}
+                    <li><a href="{{ get_taxonomy_url(kind=taxonomy, name=term) }}">{{ term }}</a></li>
+                {% endfor %}
+                </ul>
+            </dd>
+            {% endif %}
+        {% endfor %}
+
+            <dt><i class="fa inline icon icon-time-lapse2" title="Exposure details"></i><span class="sr-only">Expopsure details</span></dt>
+            <dd>
+                <ul class="photo-exposure-details">
+                {% if page.extra.exposure.focal_length %}
+                <li class="photo-exposure focal-length">{{ page.extra.exposure.focal_length}}mm</li>
+                {% endif %}
+                {% if page.extra.exposure.aperture %}
+                <li class="photo-exposure aperture">f/<span class="fnumber">{{ page.extra.exposure.aperture}}</span></li>
+                {% endif %}
+                {% if page.extra.exposure.shutter_speed %}
+                <li class="photo-exposure shutter-speed">{{ page.extra.exposure.shutter_speed}}s</li>
+                {% endif %}
+                {% if page.extra.exposure.iso %}
+                <li class="photo-exposure iso">ISO {{ page.extra.exposure.iso}}</li>
+                {% endif %}
+                {% if page.extra.exposure.flash is defined %}
+                <li class="photo-exposure flash"><i class="fa inline icon power{% if not page.extra.exposure.flash %}-crossed{% endif %}1" title="Flash: {% if page.extra.exposure.flash %}On{% else %}Off{% endif %}"></i><span class="sr-only">Flash: {% if page.extra.exposure.flash %}On{% else %}Off{% endif %}</span></li>
+                {% endif %}
+                </ul>
+            </dd>
+
+            <dt><i class="fa inline icon icon-calendar-empty" title="Date captured"></i><span class="sr-only">Date captured</span></dt>
+            <dd><time title="Date captured" datetime="{{ page.extra.date_taken | date(format='%Y-%m-%dT%H:%M:%SZ') }}">{{ page.extra.date_taken | date(format='%B %d, %Y') }}</time></dd>
+
+            <!-- <dt><i class="fa inline icon icon-calendar-empty" title="Date uploaded"></i><span class="sr-only">Date uploaded</span></dt>
+            <dd><time title="Date uploaded" datetime="{{ page.date | date(format='%Y-%m-%dT%H:%M:%SZ') }}">{{ page.date | date(format='%B %d, %Y') }}</time></dd>
+        </dl> -->
+    </div>
+
+</div>
+
+
+{% endblock main_content %}
