@@ -58,6 +58,8 @@ feed = true
 [extra]
 # Contraty to the base_url in the root, this can be used to build full links.
 base_url = "https://jordanov.photo"
+asset_uri = "//static.jordanov.photo/photos"
+#asset_uri = "media/photos"
 
 
 [extra.author]
