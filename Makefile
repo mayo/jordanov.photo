@@ -1,11 +1,6 @@
 ZOLA_CONTENT_DIR := content
 ZOLA_STATIC_DIR := static
 
-# GPG_KEYID := 50fec3a364b59bee734d0e9b56a3789ced4d2dd7
-
-# # Generated at https://keyoxide.org/util/wkd. Z-Base-32 encoded SHA1 of "mayo@oyam.ca" (Primary key UID)
-# KEYOXIDE_WKD_HANDLE := sjd3shepa5rmabd9ggran4dsd5fd4sec
-
 ZOLA_BIN ?= zola
 GPG_BIN ?= gpg
 
@@ -15,7 +10,7 @@ build: zola-build
 
 serve: zola-serve
 
-dist: update-submodules depends #update-pubkey
+dist: update-submodules depends
 
 zola-build: photo-section-index
 	$(ZOLA_BIN) build -u '/'
