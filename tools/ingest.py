@@ -69,8 +69,9 @@ class ExposureTimeETTag(ETTag): Group = "EXIF"
 class FlashETTag(ETTag): Group = "EXIF"
 class FocalLengthETTag(ETTag): Group = "EXIF"
 
-class ImageWidthETTag(ETTag): Group = "File"
-class ImageHeightETTag(ETTag): Group = "File"
+# No Group to make it more generic. Eg. PNG images have ImageWidth in PNG, not FILE group.
+class ImageWidthETTag(ETTag): pass
+class ImageHeightETTag(ETTag): pass
 
 @dataclass
 class CameraMeta:
@@ -130,7 +131,7 @@ class GpsMeta:
 @dataclass
 class PhotoMeta:
     title: str = field(default=None)
-    date: str = field(default=None)
+    date: str = field(default=datetime.now())
     date_taken: str = field(default=None)
     albums: set() = field(default_factory=set)
     tags: set() = field(default_factory=set)
@@ -158,24 +159,29 @@ class PhotoMeta:
             try:
                 self.date = datetime.strptime(self.date, "%Y-%m-%d %H:%M:%S")
             except:
-                print(f"Could not parse date: {self.date_taken}")
-                self.date_taken = None
-
+                print(f"Could not parse date: {self.date}")
+                self.date = None
 
     @classmethod
     def from_et_json(cls: Type[T], data: dict) -> T:
+        image_width_keys = [ key for key in data.keys() if key.endswith(ImageWidthETTag.to_tag()) ]
+        image_width = None
+        if len(image_width_keys) > 0:
+            image_width = data.get(image_width_keys[0], None)
+
+        image_height_keys = [ key for key in data.keys() if key.endswith(ImageHeightETTag.to_tag()) ]
+        image_height = None
+        if len(image_height_keys) > 0:
+            image_height=data.get(image_height_keys[0], None)
+
         return cls(
-            # title=data.get("name", None),
-            # date=data.get("date_imported", None),
             date_taken=data.get(DateTimeOriginalETTag.to_tag(), None),
-            # albums=[ a['title'] for a in data.get('albums', []) ],
-            # tags=[ t['tag'] for t in data.get('tags', []) ],
             gps=GpsMeta.from_et_json(data),
             camera=CameraMeta.from_et_json(data),
             exposure=ExposureMeta.from_et_json(data),
 
-            image_width=data.get(ImageWidthETTag.to_tag(), None),
-            image_height=data.get(ImageHeightETTag.to_tag(), None),
+            image_width=image_width,
+            image_height=image_height,
         )
 
     def update(self, other):
@@ -311,7 +317,9 @@ class Ingest:
         if dry_run:
             print(frontmatter.dumps(post, sort_keys=False, Dumper=SafeDumper))
         else:
-            frontmatter.dump(post, os.path.join(post_path, post_file), sort_keys=False, Dumper=SafeDumper)
+            out_path = os.path.join(post_path, post_file)
+            frontmatter.dump(post, out_path, sort_keys=False, Dumper=SafeDumper)
+            print(out_path)
 
         return post
 
@@ -364,24 +372,28 @@ class Template:
         template['extra']['gps']['altitude'] = photo_meta.gps.altitude
 
         sizes = (float(photo_meta.image_width), float(photo_meta.image_height))
-        ratio = max(sizes) / min(sizes)
 
-        if photo_meta.image_width > photo_meta.image_height:
-            multiplier = 1
-            if ratio > 1.7:
-                multiplier = 2
-            if ratio > 2.7:
-                multiplier = 3
+        if min(sizes) != 0:
+            ratio = max(sizes) / min(sizes)
 
-            template['extra']['width_multiplier'] = multiplier
+            if photo_meta.image_width > photo_meta.image_height:
+                multiplier = 1
+                if ratio > 1.7:
+                    multiplier = 2
+                if ratio > 2.7:
+                    multiplier = 3
+
+                template['extra']['width_multiplier'] = multiplier
+            else:
+                multiplier = 1
+                if ratio > 1.2:
+                    multiplier = 2
+                if ratio > 2:
+                    multiplier = 3
+
+                template['extra']['height_multiplier'] = multiplier
         else:
-            multiplier = 1
-            if ratio > 1.2:
-                multiplier = 2
-            if ratio > 2:
-                multiplier = 3
-
-            template['extra']['height_multiplier'] = multiplier
+            print("zero size", photo_meta.photo_id)
 
         template.content = photo_meta.content
 
@@ -395,8 +407,6 @@ class IngestCLI():
         self.arg_parser = argparse.ArgumentParser(
             description='Ingest photos'
         )
-
-        #self.arg_parser.add_argument('photofile')
 
         ingest_args = self.arg_parser.add_argument_group("ingest")
 
@@ -417,10 +427,6 @@ class IngestCLI():
 
     def validate_args(self, args):
 
-        # if not os.path.isfile(args.photofile):
-        #     print("Photo file doesn't exist")
-        #     exit(1)
-
         if not os.path.isfile(args.template_file):
             print("Template file doesn't exist")
             exit(1)
@@ -429,18 +435,33 @@ class IngestCLI():
             print("Content directory doesn't exist")
             exit(1)
 
+def parse_args(argv, ingest_cli):
+    grp_args = ingest_cli.arg_parser.add_argument_group("cli")
+    grp_args.add_argument('photofile')
+
+    args = ingest_cli.parse_args(argv)
+
+    if not os.path.isfile(args.photofile):
+        print("Photo file doesn't exist")
+        exit(1)
+
+    return args
+
+
 def main(argv):
-    root = logging.getLogger()
-    root.setLevel(logging.DEBUG)
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setLevel(logging.DEBUG)
-    root.addHandler(handler)
+    #root = logging.getLogger()
+    #root.setLevel(logging.DEBUG)
+    #handler = logging.StreamHandler(sys.stdout)
+    #handler.setLevel(logging.DEBUG)
+    #root.addHandler(handler)
 
     ing_cli = IngestCLI()
-    args = ing_cli.parse_args(argv)
+    args = parse_args(argv, ing_cli)
 
-    ing = Ingest(args.template_file, photo_path_prefix=args.photo_path_prefix, logger=root)
-    post = ing.ingest(None, args.photofile, post_only=args.post_only, dry_run=args.dry_run)
+    #ing = Ingest(args.content_dir, args.photo_dir, args.template_file, photo_path_prefix=args.photo_path_prefix, logger=root)
+    ing = Ingest(args.content_dir, args.photo_dir, args.template_file, photo_path_prefix=args.photo_path_prefix)
+
+    ing.ingest(None, args.photofile, post_only=args.post_only, dry_run=args.dry_run)
 
 if __name__ == '__main__':
     main(sys.argv)
