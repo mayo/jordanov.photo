@@ -10,7 +10,7 @@ I thoguht it would be a fun experiment to try to create something similar for si
 
 I took the base of my [own site][oyam.ca] including [Zola][zola]. To make things easier, I'm keeping the tech setup the same as my site: building with [GitHub Actions][ga-actions], hosting on [Amazon S3][s3], and [CloudFlare][cf] for CDN. I wrote couple of Python scripts to ingest images and generate the post files - see the site [git][site-git] repo. None of these services are required, though. Zola outputs a directory with html files, and so do the ingest tools, the files could be uploaded anywhere static html and image files can be served.
 
-The ingest tools take the JSON data from Flickr does some work to match it up to the photo files (the data export is clearly the bare minimum - the is no consistent way to match up the data to the photos). [Exiftool][et] is used to extract metadata from the photos.
+The ingest tool takes the JSON data from Flickr does some work to match it up to the photo files (the data export is clearly the bare minimum - the is no consistent way to match up the data to the photos). [Exiftool][et] is used to extract metadata from the photos.
 
 In theory, it should be possible to add more photos fairly easily with this setup, but the site generation takes some minutes. If I were to ever start publishing images frequently, I would probably look into different static site generators that can act on subset of files, or look into adding a new feature set to Zola.
 
