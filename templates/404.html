@@ -1,0 +1,12 @@
+{% extends "page.html" %}
+{% block template_vars %}
+  {{super()}}
+  {% set page_title = "Page not found" %}
+  {% set page_id = "error" %}
+{% endblock template_vars %}
+
+{% block page_content %}
+
+<p>The page you were looking for has gone missing.</p>
+
+{% endblock main_content %}
